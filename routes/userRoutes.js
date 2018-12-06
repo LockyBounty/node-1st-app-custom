@@ -1,37 +1,40 @@
 const jsonfile = require('jsonfile');
-let file_path = "./DB/users.json";
+let file_path = "./DB/toDo.json"; //<----my custom json
 
 module.exports = app => {
 
   //GET JSON DATA
-  app.get("/users", (req, res) => {
+  app.get("/toDo", (req, res) => {
     console.log("fetching all users");
 
     // jsonfile reading
-    jsonfile.readFile("./DB/users.json", function (err, content) {
+    jsonfile.readFile("./DB/toDo.json", function (err, content) {
       // send file contents back to sender
       res.send(content);
     });
     
   });
+
   //SEND JSON DATA TO DATABASE
-  app.post("/users/new", (req, res) => {
+  app.post("/toDo", (req, res) => {
 
     let {
       email,
-      username
+      username,
+        toDo
     } = req.body;
 
-    jsonfile.readFile("./DB/users.json", function (err, content) {
+    jsonfile.readFile("./DB/toDo.json", function (err, content) {
 
       content.push({
         email,
-        username
+        username,
+        toDo
       });
 
       console.log("added " + email + "to DB");
 
-      jsonfile.writeFile("./DB/users.json", content, function (err) {
+      jsonfile.writeFile("./DB/toDo.json", content, function (err) {
         console.log(err);
       });
 
@@ -40,11 +43,11 @@ module.exports = app => {
   });
 
   //DELETE JSON DATA FROM DATABASE
-  app.delete("/users/destroy", (req, res) => {
+  app.delete("/toDo", (req, res) => {
 
     let email = req.body.email;
 
-    jsonfile.readFile("./DB/users.json", function (err, content) {
+    jsonfile.readFile("./DB/toDo.json", function (err, content) {
 
       for (var i = content.length - 1; i >= 0; i--) {
 
@@ -55,7 +58,7 @@ module.exports = app => {
 
       }
 
-      jsonfile.writeFile("./DB/users.json", content, function (err) {
+      jsonfile.writeFile("./DB/toDo.json", content, function (err) {
         console.log(err);
       });
 
@@ -64,10 +67,11 @@ module.exports = app => {
   });
 
   //REPLACE USERNAME FROM LINKED EMAIL TO ANOTHER
-  app.put("/user", (req, res) => {
+  app.put("/toDo", (req, res) => {
     let user;
     let username = req.body.username;
     let email    = req.query.email;
+    let todo    = req.body.toDo;
   
     jsonfile.readFile(file_path, function(err, content) {
       for (var i = content.length - 1; i >= 0; i--) {
@@ -79,7 +83,10 @@ module.exports = app => {
           user.username = username;
   
         }
+        
       }
+     
+    
   
       jsonfile.writeFile(file_path, content, function(err) {
         console.log(err);
