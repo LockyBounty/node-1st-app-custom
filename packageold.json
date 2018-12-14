@@ -1,0 +1,25 @@
+{
+  "name": "node_first_app_custom",
+  "version": "1.0.0",
+  "description": "This is my first App",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "jsonfile": "^5.0.0"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LockyBounty/node-1st-app-custom.git"
+  },
+  "bugs": {
+    "url": "https://github.com/LockyBounty/node-1st-app-custom/issues"
+  },
+  "homepage": "https://github.com/LockyBounty/node-1st-app-custom#readme"
+}
