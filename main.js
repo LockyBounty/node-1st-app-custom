@@ -1,3 +1,11 @@
+// import { get } from "http";
+
+let urlLink = "https://api.mlab.com/api/1/databases/locky_test/collections/beers?apiKey=kSaNvvJFuTYzpEH2jXpT9VtiT1C9MFBv";
+
+
+
+
+
 $(document).ready(function(){
     $('#add-beer').on('submit', function(e){
         e.preventDefault();
@@ -16,7 +24,7 @@ $(document).ready(function(){
         */
 
         $.ajax({
-            url : "https://api.mlab.com/api/1/databases/locky_test/collections/beers?apiKey=kSaNvvJFuTYzpEH2jXpT9VtiT1C9MFBv",
+            url : urlLink,
             data: JSON.stringify( { 
                 "title" : title,
                 "type" : type,
@@ -33,3 +41,25 @@ $(document).ready(function(){
         });
     });
 });
+
+//correspond a un fetch GET
+let getBeers = () => { 
+    $.ajax({
+        url: urlLink
+    }).done(function(data){
+        let output = '<div>';
+        $.each(data, function(key,data){
+            output += '<div class="well"> ';
+            output += `<h3> ${data.title}</h3>`;
+            output += `<p> ${data.type}</p>`;
+            output += `<p> ${data.color}</p>`;
+            output += `</div>`;
+        });
+        output += `</div>`;
+        $('#beers').html(output);
+        //console.log(data); 
+    });
+}
+
+//Appelle la fonction qui get les datas en cliquant sur le bouton.
+$("#bout2").click(getBeers); 
