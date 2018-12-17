@@ -23,7 +23,7 @@ app.use(morgan('dev'));
 
 //Rota Padrão da API:
 app.get('/', function(req, res) {
-    res.send('Seja Bem-Vindo a API: http://localhost:' + port + '/api');
+    res.send('Pour l'API: http://localhost:' + port + '/api');
 });
 
 //Aqui estamos obtendo a instância do router para as rotas das APIs:
